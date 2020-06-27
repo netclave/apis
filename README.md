@@ -9,7 +9,7 @@ This is a utility repo, used by the other NetClave components. It consists into 
 ## Why is this so awesome? 🤩
 
 You want to learn more about how you can use NetClave to protect your local network? [**Learn about all our Products**](https://www.blackvisor.io/products/).
-Or checkout our whitepaper! [**NetClave whitepaper**](https://www.blackvisor.io/whiterpapers/)
+Or checkout our whitepaper! [**NetClave whitepaper**](https://www.blackvisor.io/whitepapers/)
 
 ## Get your NetClave 🚚
 
