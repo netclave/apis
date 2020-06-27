@@ -1,0 +1,151 @@
+syntax = "proto3";
+package api;
+
+import "google/api/annotations.proto";
+
+message Opener {
+  string openerId = 1;
+  string name = 2;
+}
+
+message User {
+  string userId = 1;
+  string email = 2;
+  string phone = 3;
+  string type = 4;
+}
+
+message ListOpenersRequest {
+}
+
+message ListOpenersResponse {
+  repeated Opener openers  = 1;
+}
+
+message ListUsersRequest {
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+}
+
+message AddPortForUserAndOpenerRequest {
+  string userId = 1;
+  string openerId = 2;
+  string port = 3;
+  string protocols = 4;
+}
+
+message AddPortForUserAndOpenerResponse {
+}
+
+message DelPortForUserAndOpenerRequest {
+  string userId = 1;
+  string openerId = 2;
+  string port = 3;
+}
+
+message DelPortForUserAndOpenerResponse {
+}
+
+message OpenerAndPort {
+  string openerId = 1;
+  string openerName = 2;
+  string port = 3;
+  string protocols = 4;
+}
+
+message ListPortsForUserRequest {
+    string userId = 1;
+}
+
+message ListPortsForUserResponse {
+    repeated OpenerAndPort result = 1;
+}
+
+message UserAndPort {
+  string userId = 1;
+  string email = 2;
+  string phone = 3;
+  string port = 4;
+  string protocols = 5;
+}
+
+message ListPortsForOpenerRequest {
+    string openerId = 1;
+}
+
+message ListPortsForOpenerResponse {
+    repeated UserAndPort result = 1;
+}
+
+message ListActiveIpsForUserRequest {
+     string userId = 1;
+     string local = 2;
+}
+
+message ListActiveIpsForUserResponse {
+    repeated string result = 1;
+}
+
+message AddServiceToUserRequest {
+  string userId = 1;
+  string service = 2;
+}
+
+message AddServiceToUserResponse {
+}
+
+message ListServicesForUserRequest {
+  string userId = 1;
+}
+
+message ListServicesForUserResponse {
+  repeated string services = 2;
+}
+
+message DelServiceToUserRequest {
+  string userId = 1;
+  string service = 2;
+}
+
+message DelServiceToUserResponse {
+}
+
+message PutUserRequest {
+  User user = 1;
+}
+
+message PutUserResponse {
+}
+
+message DelUserRequest {
+  string userId = 1;
+}
+
+message DelUserResponse {
+}
+
+message GetUserRequest {
+  string userId = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+service IdentityProviderAdmin {
+  rpc listOpeners(ListOpenersRequest) returns (ListOpenersResponse);
+  rpc putUser(PutUserRequest) returns (PutUserResponse);
+  rpc delUser(DelUserRequest) returns (DelUserResponse);
+  rpc getUser(GetUserRequest) returns (GetUserResponse);
+  rpc listUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc addPortForUserAndOpener(AddPortForUserAndOpenerRequest) returns (AddPortForUserAndOpenerResponse);
+  rpc delPortForUserAndOpener(DelPortForUserAndOpenerRequest) returns (DelPortForUserAndOpenerResponse);
+  rpc listPortsForUser(ListPortsForUserRequest) returns (ListPortsForUserResponse);
+  rpc listPortsForOpener(ListPortsForOpenerRequest) returns (ListPortsForOpenerResponse);
+  rpc listActiveIpsForUser(ListActiveIpsForUserRequest) returns (ListActiveIpsForUserResponse);
+  rpc addServiceToUser(AddServiceToUserRequest) returns (AddServiceToUserResponse);
+  rpc listServicesForUser(ListServicesForUserRequest) returns (ListServicesForUserResponse);
+  rpc delServiceToUser(DelServiceToUserRequest) returns (DelServiceToUserResponse);
+}

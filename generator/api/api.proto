@@ -1,0 +1,66 @@
+syntax = "proto3";
+package api;
+
+import "google/api/annotations.proto";
+
+message IdentityProvider {
+  string url = 1;
+  string id = 2;
+}
+
+message ListIdentityProvidersRequest {
+}
+
+message ListIdentityProvidersResponse {
+  repeated IdentityProvider identityProviders = 1;
+}
+
+message AddIdentityProviderRequest {
+  string identityProviderUrl = 1;
+  string emailOrPhone = 2;
+}
+
+message AddIdentityProviderResponse {
+  string response = 1;
+  string identityProviderId = 2;
+}
+
+message ConfirmIdentityProviderRequest {
+  string identityProviderUrl = 1;
+  string identityProviderId = 2;
+  string confirmationCode = 3;
+}
+
+message ConfirmIdentityProviderResponse {
+  string response = 1;
+}
+
+message RegisterDeviceRequest {
+  string devID = 1;
+}
+
+message RegisterDeviceResponse {
+}
+
+message ListNonRegisteredDevicesRequest {
+}
+
+message ListNonRegisteredDevicesResponse {
+  repeated string devices = 1;
+}
+
+message AddWalletRequest {
+  string QRcode = 1;
+}
+
+message AddWalletResponse {
+}
+
+service GeneratorAdmin {
+  rpc listIdentityProviders(ListIdentityProvidersRequest) returns (ListIdentityProvidersResponse);
+  rpc addIdentityProvider(AddIdentityProviderRequest) returns (AddIdentityProviderResponse);
+  rpc confirmIdentityProvider(ConfirmIdentityProviderRequest) returns (ConfirmIdentityProviderResponse);
+  rpc registerDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse);
+  rpc listNonRegisteredDevices(ListNonRegisteredDevicesRequest) returns (ListNonRegisteredDevicesResponse);
+  rpc addWallet(AddWalletRequest) returns (AddWalletResponse);
+}

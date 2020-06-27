@@ -1,0 +1,59 @@
+syntax = "proto3";
+package api;
+
+import "google/api/annotations.proto";
+
+message IdentityProvider {
+  string url = 1;
+  string id = 2;
+}
+
+message ListIdentityProvidersRequest {
+}
+
+message ListIdentityProvidersResponse {
+  repeated IdentityProvider identityProviders = 1;
+}
+
+message AddIdentityProviderRequest {
+  string identityProviderUrl = 1;
+  string emailOrPhone = 2;
+}
+
+message AddIdentityProviderResponse {
+  string response = 1;
+  string identityProviderId = 2;
+}
+
+message ConfirmIdentityProviderRequest {
+  string identityProviderUrl = 1;
+  string identityProviderId = 2;
+  string confirmationCode = 3;
+  string proxyName = 4;
+}
+
+message ConfirmIdentityProviderResponse {
+  string response = 1;
+}
+
+message GetWalletsAndServicesRequest {
+}
+
+message GetWalletsAndServicesResponse {
+  repeated string dataForWallet = 1;
+}
+
+message GetActiveTokensRequest {
+}
+
+message GetActiveTokensResponse {
+  repeated string dataForWallet = 1;
+}
+
+service ProxyAdmin {
+  rpc listIdentityProviders(ListIdentityProvidersRequest) returns (ListIdentityProvidersResponse);
+  rpc addIdentityProvider(AddIdentityProviderRequest) returns (AddIdentityProviderResponse);
+  rpc confirmIdentityProvider(ConfirmIdentityProviderRequest) returns (ConfirmIdentityProviderResponse);
+  rpc getWalletsAndServices(GetWalletsAndServicesRequest) returns (GetWalletsAndServicesResponse);
+  rpc getActiveTokens(GetActiveTokensRequest) returns (GetActiveTokensResponse);
+}
