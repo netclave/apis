@@ -23,6 +23,7 @@ message AddIdentityProviderRequest {
 message AddIdentityProviderResponse {
   string response = 1;
   string identityProviderId = 2;
+  string identityProviderUrl = 3;
 }
 
 message ConfirmIdentityProviderRequest {
@@ -56,6 +57,53 @@ message AddWalletRequest {
 message AddWalletResponse {
 }
 
+message ListWalletsRequest {
+
+}
+
+message ListWalletsResponse {
+  repeated string wallets = 1;
+}
+
+message WalletSharingRequest {
+  string QRcode = 1;
+  string comment = 2;
+  string requestHash = 3;
+}
+
+message GetWalletSharingRequestsRequest {
+}
+
+message GetWalletSharingRequestsResponse {
+  repeated WalletSharingRequest requests = 1;
+}
+
+message ApproveWalletSharingRequestRequest {
+  string requestHash = 1;
+}
+
+message ApproveWalletSharingRequestResponse {
+}
+
+message DeleteWalletSharingRequestRequest {
+  string requestHash = 1;
+}
+
+message DeleteWalletSharingRequestResponse {
+}
+
+message GetBluetoothEndpointsDescriptorsRequest {
+}
+
+message GetBluetoothEndpointsDescriptorsResponse {
+  map<string, string> endpoints = 1;
+}
+
+message BluetoothEncryptionContainer {
+  string iv = 1;
+  string ciphertext = 2;
+}
+
 service GeneratorAdmin {
   rpc listIdentityProviders(ListIdentityProvidersRequest) returns (ListIdentityProvidersResponse);
   rpc addIdentityProvider(AddIdentityProviderRequest) returns (AddIdentityProviderResponse);
@@ -63,4 +111,8 @@ service GeneratorAdmin {
   rpc registerDevice(RegisterDeviceRequest) returns (RegisterDeviceResponse);
   rpc listNonRegisteredDevices(ListNonRegisteredDevicesRequest) returns (ListNonRegisteredDevicesResponse);
   rpc addWallet(AddWalletRequest) returns (AddWalletResponse);
+  rpc listWallets(ListWalletsRequest) returns (ListWalletsResponse);
+  rpc getWalletSharingRequests(GetWalletSharingRequestsRequest) returns (GetWalletSharingRequestsResponse);
+  rpc approveWalletSharingRequest(ApproveWalletSharingRequestRequest) returns (ApproveWalletSharingRequestResponse);
+  rpc deleteWalletSharingRequest(DeleteWalletSharingRequestRequest) returns (DeleteWalletSharingRequestResponse);
 }

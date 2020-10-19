@@ -9,11 +9,12 @@ mainDir=( $(pwd))
 
 for buf in "${changed_protos[@]}"
 do
-    echo "Compilling $buf ..."
+    echo "Compiling $buf ..."
     export PROTODIR=`dirname $(dirname "$buf")`
     echo $PROTODIR
     cd $PROTODIR
     protoc -I api/ -I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis --go_out=plugins=grpc:api api/api.proto
+    protoc -I api/ -I ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis --dart_out=dart api/api.proto
     echo "$buf is done"
     cd $mainDir
 done
